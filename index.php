@@ -43,6 +43,30 @@ class KuruTemizleme{
     }
 }
 
-$kuruTemizlemeci = new KuruTemizleme();
+
+class EveKuruTemizleme extends KuruTemizleme{
+
+    public function yika($gelenCamasir = null, $teslimAlinacakMi = true, $teslimEdilecekMi = true){
+
+        if(!is_null($gelenCamasir))
+            $this->setCamasir($gelenCamasir);
+
+        if($teslimAlinacakMi) $this->teslimAl();
+
+        parent::yika();
+
+        if($teslimEdilecekMi) $this->teslimEt();
+    }
+
+    private function teslimAl(){
+        echo $this->camasir." teslim alındı<br>";
+    }
+
+    private function teslimEt(){
+        echo $this->camasir." teslim edildi<br>";
+    }
+}
+
+$kuruTemizlemeci = new EveKuruTemizleme();
 $kuruTemizlemeci->setCamasir("Pantul");
 $kuruTemizlemeci->yika();
